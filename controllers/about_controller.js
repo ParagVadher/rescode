@@ -1,0 +1,3 @@
+module.exports.license = function(req,res){
+    return res.end('<p>ParagV hosts a wide variety of collaborative projects from all over the world, and that collaboration only works when our users are able to work together in good faith. While using the service, you must follow the terms of this section, which include some restrictions on content you can post, conduct on the service, and other limitations. In short, be excellent to each other.</p>')
+};
