@@ -1,5 +1,8 @@
 module.exports.home = function(req, res){
-    return res.end('<h1>This is the home controller routed through routes!</h1>');
+    // return res.end('<h1>This is the home controller routed through routes!</h1>');
+    return res.render('home', {
+        title: "Home"
+    });
 };
 
 module.exports.gamefeed = function(req, res){
