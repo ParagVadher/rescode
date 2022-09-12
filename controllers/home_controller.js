@@ -6,5 +6,5 @@ module.exports.home = function(req, res){
 };
 
 module.exports.gamefeed = function(req, res){
-    return res.end('<h1>should have played a game here, this runs from a statemet in routes/index.js that fetches a homecontroller function directly</h1>');
+    return res.end('<h1>should have played a game here, this runs from a statement in routes/index.js that fetches a homecontroller function directly</h1>');
 };
