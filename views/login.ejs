@@ -1,0 +1,17 @@
+<!-- login page to authenticate -->
+<html>
+    <head>
+        <title>
+            <%= title %>
+        </title>
+    </head>
+    <body>
+        <form action="authenticate_user">
+            <label for="email">Email: </label>
+            <input type="text" required>
+
+            <label for="password">Password: </label>
+            <input type="password" minlength="8" required>
+        </form>
+    </body>
+</html>
