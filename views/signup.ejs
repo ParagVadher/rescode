@@ -6,15 +6,20 @@
         </title>
     </head>
     <body>
-        <form action="create_user">
-            <label for="email">Email Address: </label>
-            <input type="text" name="email">
+        <h1>Sign Up</h1>
+        <form action="create_user" method="POST">
+            <!-- <label for="email">Email Address: </label> -->
+            <input type="text" name="name" placeholder="Your Name">
             
-            <label for="name">Name: </label>
-            <input type="text" name="name">
+            <!-- <label for="name">Name: </label> -->
+            <input type="text" name="email" placeholder="Your email">
 
-            <label for="password">Password: </label>
-            <input type="password" name="password" minlength="8">
+            <!-- <label for="password">Password: </label> -->
+            <input type="password" name="password" minlength="8" placeholder="Password">
+
+            <input type="password" name="confirm_password" placeholder="Confirm Password">
+
+            <input type="submit" value="Sign Up">
         </form>
     </body>
 </html>
