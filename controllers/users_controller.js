@@ -5,9 +5,18 @@ const User = require('../models/user');
 // };
 
 module.exports.profile = function(req, res){
-    return res.render('user_profile', {
-        title: 'User Profile'
-    })
+    if(req.cookies.user_id){
+        User.findById(req.cookies.user_id, function(err, user){
+            if(user){
+                return res.render('user_profile', {
+                    title: 'User Profile',
+                    user: user
+                })
+            }
+        });
+    }else{
+        return res.redirect('/users/signup')
+    }
 }
 
 module.exports.login = function(req, res){
@@ -20,10 +29,12 @@ module.exports.create = function(req, res){
         return res.redirect('back');
     }
 
+    // create a user if it does not already exist
+    // first find it
     User.findOne({email: req.body.email}, function(err, user){
         if(err){ console.log('error in finding the user with that email on sign up'); return}
 
-        
+        // if no such user, then 
 
         if(!user){
             User.create(req.body, function(err, user){
@@ -32,6 +43,7 @@ module.exports.create = function(req, res){
                 return res.redirect('/users/login');
 
             })
+            // else go back to the sign up page
         }else{
             return res.redirect('back');
         }
@@ -40,5 +52,29 @@ module.exports.create = function(req, res){
 
 // log in and create a session for the user
 module.exports.createSession = function(req, res){
-    // TODO create a sesh
+    // authenticate the user
+    // find the user
+    User.findOne({email: req.body.email}, function(err, user){
+        if(err){ console.log('error in finding the user with that email when logging in'); return}
+
+        // handle if user is found
+        if(user){
+            // handle if password does not match
+            if(user.password != req.body.password){
+                return res.redirect('back');
+            }else{
+                // if it matches then assign a cookie to a user_id and redirect to the profile page
+                res.cookie('user_id', user._id);
+                return res.redirect('/users/profile');
+            }
+        }else{
+            return res.redirect('back');
+        }
+    });
+}
+
+module.exports.endSession = function(req, res){
+    // TODO delete the sesh
+    res.cookie('user_id', "");
+    return res.redirect('/users/signup');
 }

@@ -10,5 +10,7 @@ router.get('/profile', usersController.profile);
 router.get('/signup', authController.signup);
 router.get('/login', authController.login);
 router.post('/create_user', usersController.create);
+router.post('/create', usersController.createSession);
+router.post('/logout', usersController.endSession);
 
 module.exports=router;
