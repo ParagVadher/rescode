@@ -7,14 +7,11 @@
     </head>
     <body>
         <h2>Login</h2>
-        <form action="authenticate_user">
-            <!-- <label for="email">Email: </label> -->
-            <input type="text" required placeholder="Email">
+            <form action="/users/create-session" method="POST">
+                <input type="email" name="email" placeholder="Email"  required>
+                <input type="password" name="password" placeholder="Password"  required>
+                <input type="submit" value="Sign In">
 
-            <!-- <label for="password">Password: </label> -->
-            <input type="password" minlength="8" required placeholder="Password">
-
-            <input type="submit" value="Log in">
-        </form>
+            </form>
     </body>
 </html>

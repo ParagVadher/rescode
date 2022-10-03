@@ -22,9 +22,7 @@ module.exports.create = function(req, res){
 
     User.findOne({email: req.body.email}, function(err, user){
         if(err){ console.log('error in finding the user with that email on sign up'); return}
-
         
-
         if(!user){
             User.create(req.body, function(err, user){
                 if(err){ console.log('error in finding the user with that email on sign up'); return}
@@ -40,5 +38,5 @@ module.exports.create = function(req, res){
 
 // log in and create a session for the user
 module.exports.createSession = function(req, res){
-    // TODO create a sesh
+    return res.redirect('/');
 }

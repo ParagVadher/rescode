@@ -3,10 +3,14 @@ const cookieParser = require('cookie-parser');
 const app = express();
 const port = 8000;
 const expressLayouts = require('express-ejs-layouts');
+const db1 = require('./config/mongoose.js');
+// used for session cookie
+const session = require('express-session');
+const passport = require('passport');
+const passportLocal = require('./config/passport-local-strategy');
+const { resolveInclude } = require('ejs');
 
 app.use(express.urlencoded({extended: true}));
-
-const db1 = require('./config/mongoose.js');
 
 app.use(cookieParser());
 
@@ -18,11 +22,33 @@ app.use(expressLayouts);
 app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);
 
-//use express router - last line from index.js in routes brings it to you
-app.use('/', require('./routes'));
-
+// set the views
 app.set('view engine', 'ejs');
 app.set('views', './views');
+
+// express session
+app.use(session({
+    name: 'rescode',
+    // TODO change teh secret before deployment in production mode
+    secret: 'magichoungayaha',
+    saveUninitialized: false,
+    resave: false,
+    cookie:{
+        maxAge: (1000 * 60 * 100)
+    }
+}));
+
+// start passport middleware's work
+app.use(passport.initialize());
+app.use(passport.session());
+
+//remove this and see how the user data will not be accessible in the user_profile.ejs page. 
+// that is because this function sort of makes sure that the locals variable is 
+app.use(passport.setAuthenticatedUser);
+
+
+//use express router - last line from index.js in routes brings it to you
+app.use('/', require('./routes'));
 
 app.listen(port, function(err){
     if(err){
