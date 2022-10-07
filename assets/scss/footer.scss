@@ -1,0 +1,19 @@
+.footer0{
+    background-color: rgba(155, 155, 155, 0.767);
+        display: flex;
+        flex-direction: row;
+        // justify-content: space-between;
+        color: azure;
+        height: 40px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+    ul{
+        position: relative;
+        bottom: 15px;
+        // display: flex;
+        // flex-direction: row;
+        // gap: 13px;
+        list-style: none;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
+    }
+}

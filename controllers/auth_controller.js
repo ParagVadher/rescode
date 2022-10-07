@@ -4,7 +4,7 @@ module.exports.login = function(req, res){
         return res.redirect('/users/profile')
     }
     return res.render('login', {
-        title: "rescode | Login"
+        title: "Rescode | Login"
     });
 };
 
