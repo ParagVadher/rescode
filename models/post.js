@@ -11,13 +11,15 @@ const postSchema = new Schema({
         ref: 'User'
     },
     // include comment array here
-    comment:[{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'comment'
-    }]
+    comments:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Comment'
+        }
+    ]
 },{
     timestamps: true
 });
 
 const Post = mongoose.model('Post', postSchema);
-module.exports=Post;
+module.exports = Post;
