@@ -13,10 +13,27 @@ module.exports.create = function(req, res){
     
 }
 
+// module.exports.destroy = function(req, res){
+//     Post.findById(req.params.id, function(err, post){
+//         // .id converts the object id to string issliye not using _id
+//         if(post.user=req.user.id){
+//             post.remove();
+
+//             Comment.deleteMany({post: req.params.id}, function(err){
+//                 return res.redirect('back');
+//             });
+//         }else{
+//             return res.redirect('back');
+//         }
+
+
+//     });
+// }
+
 module.exports.destroy = function(req, res){
     Post.findById(req.params.id, function(err, post){
-        // .id converts the object id to string issliye not using _id
-        if(post.user=req.params.id){
+        // .id means converting the object id into string
+        if (post.user == req.user.id){
             post.remove();
 
             Comment.deleteMany({post: req.params.id}, function(err){
@@ -25,7 +42,6 @@ module.exports.destroy = function(req, res){
         }else{
             return res.redirect('back');
         }
-
 
     });
 }
