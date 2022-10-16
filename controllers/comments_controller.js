@@ -52,7 +52,7 @@ module.exports.create = function(req, res){
 module.exports.destroy = function(req, res){
     // delete the comment
     Comment.findById(req.params.id, function(err, comment){
-        if(comment.user == req.user.id){
+        if(comment.user == req.user.id || post.user.id == req.user.id){
 
             let postId = comment.post;
 
