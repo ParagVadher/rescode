@@ -11,7 +11,9 @@ const passportLocal = require('./config/passport-local-strategy');
 const { resolveInclude } = require('ejs');
 const MongoStore = require('connect-mongo');
 const { db } = require('./models/user.js');
-const  sassMiddleware = require('node-sass-middleware');
+const sassMiddleware = require('node-sass-middleware');
+const flash = require('connect-flash');
+const customMware = require('./config/middleware');
 
 app.use(sassMiddleware({
     src: './assets/scss',
@@ -64,6 +66,11 @@ app.use(passport.session());
 // that is because this function sort of makes sure that the locals variable is 
 app.use(passport.setAuthenticatedUser);
 
+// use flash to chatter using sessions
+app.use(flash());
+
+// use middleware in the config file and run the setFlash function 
+app.use(customMware.setFlash);
 
 //use express router - last line from index.js in routes brings it to you
 app.use('/', require('./routes'));
