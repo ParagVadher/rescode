@@ -18,10 +18,11 @@ module.exports.create = async function(req, res){
                 post.comments.push(comment);
                 post.save();
 
+                req.flash('success', 'Comment created successfully');
                 res.redirect('/');
         }
     } catch (err) {
-        console.log('Error aa gaya: ', err);
+        req.flash('error', 'Error in creating post');
         return;
     }
 
@@ -35,6 +36,7 @@ module.exports.destroy = function(req, res){
             let postId = comment.post;
 
             Post.findByIdAndUpdate(postId, {$pull: {comments: req.params.id}}, function(err, post){
+                req.flash('success', 'Comment deleted successfully');
                 return res.redirect('back');
             });
 

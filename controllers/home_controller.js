@@ -23,7 +23,7 @@ module.exports.home = async function(req, res){
             });
 
         } catch (err) {
-            console.log('Error aa gaya: ', err);
+            req.flash('error', 'Error in fetching post');
             return;
         }
 };

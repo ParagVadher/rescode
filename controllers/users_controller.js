@@ -18,9 +18,11 @@ module.exports.update = function(req, res){
     // check if the logged in user and the user making the update request are the same
     if(req.user.id==req.params.id){
         User.findByIdAndUpdate(req.params.id, req.body, function(err, user){
+            req.flash('success', 'Profile updated');
             return res.redirect('back');
         });
     }else{
+        req.flash('error', '401 | Unautorized')
         return res.status(401).send('Unauthorized');
     }
 }

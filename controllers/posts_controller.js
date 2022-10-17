@@ -18,23 +18,27 @@ module.exports.create = async function(req, res){
 }
 
 module.exports.destroy = async function(req, res){
-    let post = Post.findById(req.params.id);
     
-    try {
     
-    // .id means converting the object id into string
-    if(post.user == req.user.id){
-        post.remove();
+    try{
+        let post = await Post.findById(req.params.id);
+        // .id means converting the object id into string
+        if(post.user == req.user.id){
+            post.remove();
 
-        await Comment.deleteMany({post: req.params.id});
-        return res.redirect('back');
+            await Comment.deleteMany({post: req.params.id});
 
-    }else{
+            req.flash('success', 'Post deleted successfully');
+            return res.redirect('back');
+
+        }else{
+            req.flash('error', 'You cannot delete this post!');
+            return res.redirect('back');
+        }
+
+    } catch(err) {
+        req.flash('error', err);
         return res.redirect('back');
-    }
-    } catch (err) {
-        console.log('Error aa gaya: ', err);
-        return;
     }
 
 }
