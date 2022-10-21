@@ -13,10 +13,6 @@
     <form action="/users/update/<%= profile_user.id %>" method="POST">
         <input type="text" name="name" id="" placeholder="Your Name" value="<%= profile_user.name %>" required>
         <input type="email" name="email" id="" placeholder="Your Email" value="<%= profile_user.email %>" required>
-        <input type="submit" name="" id="" value="submit">
+        <input type="submit" name="" id="" value="edit">
     </form>
-<% }else{ %>
-    <!-- show profile info -->
-    <p>Name: <%=profile_user.name %></p>
-    <p>User email: <%=profile_user.email %></p>
 <% } %>

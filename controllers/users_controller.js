@@ -31,23 +31,25 @@ module.exports.login = function(req, res){
 
 // get the sign up data
 module.exports.create = function(req, res){
-    if(req.body.password!=req.body.confirm_password){
+    if (req.body.password != req.body.confirm_password){
+        req.flash('error', 'Passwords do not match');
         return res.redirect('back');
     }
 
     User.findOne({email: req.body.email}, function(err, user){
-        if(err){ console.log('error in finding the user with that email on sign up'); return}
-        
-        if(!user){
+        if(err){req.flash('error', err); return}
+
+        if (!user){
             User.create(req.body, function(err, user){
-                if(err){ console.log('error in finding the user with that email on sign up'); return}
+                if(err){req.flash('error', err); return}
 
                 return res.redirect('/users/login');
-
             })
         }else{
+            req.flash('success', 'You have signed up, login to continue!');
             return res.redirect('back');
         }
+
     });
 }
 
@@ -57,11 +59,13 @@ module.exports.createSession = function(req, res){
 }
 
 module.exports.destroySession = function(req, res, next){
+    console.log(`${res.locals.user.name} signed out!`)
     req.logout(function(err) {
-      if (err) 
-      { 
+      if (err){ 
         return next(err); 
       }
       res.redirect('/');
     });
+    req.flash('success', 'Logged Out Successfully');
+    return res.redirect('/users/login');
   };
