@@ -4,9 +4,7 @@ mongoose.connect('mongodb://localhost/rescode_development');
 // mongodb://localhost/rescode_development
 
 // to connect to mongo's prod database
-// mongodb+srv://Paragv0:mLrlQv85Yx6iGa5r@rescode.rzpgtil.mongodb.net/?retryWrites=true&w=majority
-// Paragv0
-// mLrlQv85Yx6iGa5r
+// check exp1 on gdrive for password to prod db
 
 const db = mongoose.connection;
 
