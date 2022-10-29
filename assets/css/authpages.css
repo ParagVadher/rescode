@@ -38,10 +38,8 @@ body {
     background: none;
     z-index: 1; }
   body ::placeholder {
-    color: transparent; }
-  body label {
     position: absolute;
-    top: 15px;
+    top: 13px;
     left: 15px;
     padding: 0 4px;
     background-color: white;

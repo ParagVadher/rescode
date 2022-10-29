@@ -45,11 +45,8 @@ body {
       /* Hide the placeholder texts (a) */
       
       ::placeholder {
-        color: transparent;
-      }
-      label {
         position: absolute;
-        top: 15px;
+        top: 13px;
         left: 15px;
         padding: 0 4px;
         background-color: white;
