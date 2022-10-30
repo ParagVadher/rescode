@@ -12,6 +12,7 @@
                 data: newPostForm.serialize(),
                 success: function(data){
                     let newPost = newPostDom(data.data.post);
+                    $('#posts-list-container>ul').prepend(newPost);
                 },
                 error: function(error){
                     console.log(error.responseText);
