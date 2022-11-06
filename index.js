@@ -39,6 +39,9 @@ app.set('layout extractScripts', true);
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
+// access open to uploads
+app.use('/uploads', express.static(__dirname + '/uploads'));
+
 // mongo store is used to store the session cookie in the db
 app.use(session({
     name: 'rescode',
