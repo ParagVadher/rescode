@@ -6,7 +6,7 @@ module.exports.index = async function(req, res){
     // populate the user of each post
     let posts = await Post.find({})
     .sort('-createdAt')
-    .populate('user')
+    .populate('user', '-password') //hide password in get request
     .populate({
         path: 'comments',
         populate: {
@@ -22,27 +22,35 @@ module.exports.index = async function(req, res){
 }
 
 module.exports.destroy = async function(req, res){
-    let post = await Post.findById(req.params.id);
     
     try {
+
+        let post = await Post.findById(req.params.id);
     
-    // .id means converting the object id into string
-    // if(post.user == req.user.id){
-        post.remove();
+        // .id means converting the object id into string
+        // console.log(req);
+        if(post.user == req.user.id){
+            post.remove();
 
-        await Comment.deleteMany({post: req.params.id});
+            await Comment.deleteMany({post: req.params.id});
 
-        return res.json(200, {
-            message: "Post and Comments deleted"
-        })
+            return res.json(200, {
+                message: "Post and Comments deleted"
+            })
 
-    // }else{
-    //     req.flash('error', 'You cannot delete this post!')
-    //     return res.redirect('back');
-    // }
+        }else{
+            console.log('*********',post.user);
+            console.log('*********',req.user);
+            // console.log('***post.user: ', post.user);
+            // console.log('***post:      ', post);
+            // console.log('***req.user.id:', req.user.id);
+            return res.status(401).json({
+                message: "You cannot delete this post"
+            });
+        }
     } catch (err) {
-        console.log('Error aa gaya: ', err);
-        return res.json(500, {
+        console.log('Error found: ', err);
+        return res.status(500).json({
                 message: "Internal server error"
             });
     }

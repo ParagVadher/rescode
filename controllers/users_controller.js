@@ -37,16 +37,36 @@ module.exports.update = async function(req, res){
                 user.email = req.body.email;
 
                 // saving the path of the uploaded file in the avatar field of the user if the file is uploaded
+                // if(req.file){
+
+                //     // if an avatar already exists, remove it
+                //     // let filePath = path.join(__dirname, '..', user.avatar);
+                //     // if(fs.existsSync(filePath)){
+                //     //     fs.unlinkSync(filePath);
+                //     // }
+
+                //     let currAvatarPath = path.join(__dirname, '..', user.avatar);
+                //         if(fs.existsSync(currAvatarPath))
+                //         {
+                //             fs.unlinkSync(currAvatarPath);
+                //         }
+                //     user.avatar = User.avatarPath + '/' + req.file.filename;
+                // }
+                
                 if(req.file){
 
-                    // if an avatar already exists, remove it
-                    let filePath = path.join(__dirname, '..', user.avatar);
-                    if(fs.existsSync(filePath)){
-                        fs.unlinkSync(filePath);
+                    if(user.avatar){
+                        let fileExists = fs.existsSync(path.join(__dirname , '..' , user.avatar));
+
+                        if(fileExists){
+                            fs.unlinkSync(path.join(__dirname , '..' , user.avatar));
+                        }
                     }
+
+                    //This is saving the path of the uploaded file in avatar field in user
                     user.avatar = User.avatarPath + '/' + req.file.filename;
                 }
-                
+
                 user.save();
                 return res.redirect('back');
             });

@@ -48,6 +48,8 @@ module.exports.destroy = async function(req, res){
         }
 
         req.flash('success', 'Post and associated comments deleted!');
+        console.log('*********',post.user);
+        console.log('*********',req.user.id);
         return res.redirect('back');
 
     }else{
