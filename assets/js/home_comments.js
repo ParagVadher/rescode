@@ -4,18 +4,19 @@
 // 1. When the page loads
 // 2. Creation of every post dynamically via AJAX
 
-class PostComments{
+class postComments{
     // constructor is used to initialize the instance of the class whenever a new instance is created
     constructor(postId){
         this.postId = postId;
         this.postContainer = $(`#post-${postId}`);
         this.newCommentForm = $(`#post-${postId}-comments-form`);
 
+        console.log('called',postId);
         this.createComment(postId);
 
         let self = this;
         // call for all the existing comments
-        $(' .delete-comment-button', this.postContainer).each(function(){
+        $('.delete-comment-button', this.postContainer).each(function(){
             self.deleteComment($(this));
         });
     }

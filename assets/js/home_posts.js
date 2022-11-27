@@ -16,7 +16,7 @@
                     deletePost($(' .delete-post-button', newPost));
 
                     // call the create comment class
-                    new PostComments(data.data.post._id);
+                    new postComments(data.data.post._id);
                     
                     new Noty
                     ({
