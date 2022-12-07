@@ -2,6 +2,10 @@
   background-color: rgba(155, 155, 155, 0.767);
   display: flex;
   flex-direction: row;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
   color: azure;
   height: 40px;
   padding-top: 3px;

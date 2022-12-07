@@ -41,7 +41,7 @@ module.exports.destroy = async function(req, res){
         }else{
             console.log('*********',post.user);
             console.log('*********',req.user);
-            console.log('*********', profile_user.id);
+            console.log('*********', req.id);
             // console.log('***post.user: ', post.user);
             // console.log('***post:      ', post);
             // console.log('***req.user.id:', req.user.id);
